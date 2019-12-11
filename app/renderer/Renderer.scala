@@ -18,14 +18,15 @@ package renderer
 
 import config.FrontendAppConfig
 import javax.inject.Inject
+import play.api.i18n.{Lang, Langs, MessagesApi}
 import play.api.libs.json.{JsObject, Json, OWrites}
 import play.api.mvc.RequestHeader
 import play.twirl.api.Html
-import uk.gov.hmrc.nunjucks.NunjucksRenderer
+import wolfendale.playnunjucks._
 
 import scala.concurrent.Future
 
-class Renderer @Inject()(appConfig: FrontendAppConfig, renderer: NunjucksRenderer) {
+class Renderer @Inject()(appConfig: FrontendAppConfig, renderer: NunjucksRenderer, messagesApi: MessagesApi, langs: Langs) {
 
   def render(template: String)(implicit request: RequestHeader): Future[Html] =
     renderTemplate(template, Json.obj())
